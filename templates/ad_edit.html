@@ -1,0 +1,18 @@
+{% extends 'default.html' %}
+
+{% block content %}
+<h1>Объявление:</h1>
+<h1>{{object.title}}</h1>
+<h1>{{object.ad_time}}</h1>
+<hr>
+{% if request.user.id == object.author.id %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ form.media }}
+    <input type="submit" value="Save" />
+</form>
+{% else %}
+<h1>Недостаточно прав! </h1>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,30 @@
+<!--  наследуемся от шаблона default.html -->
+{% extends 'default.html' %}
+
+
+
+<!-- Название у нас будет  -->
+{% block title %}
+Ad
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
+{% block content %}
+<h3>{{ ad.title }}</h3>
+<hr>
+   {% if ad %}
+       <table>
+           <tr>
+               <td>{{ ad.get_category_display }}</td>
+           </tr>
+           <tr>
+               <td>{{ ad.text}}</td>
+           </tr>
+           <tr>
+               <td>Опубликовоно {{ ad.ad_time|date:'d.m.Y' }}. Автор :{{ ad.author }}</td>
+           </tr>
+       </table>
+   {% else %}
+       <h2>Такого поста не существует!</h2>
+   {% endif %}
+{% endblock content %}
