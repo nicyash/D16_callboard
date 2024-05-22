@@ -26,9 +26,6 @@ class Ad(models.Model):
     ad_time = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255, default='Загаловок')
     text = RichTextUploadingField(blank=True, null=True)
-    upload = models.ImageField(
-        upload_to='uploads/', help_text='Загрузите файл', blank=True, verbose_name='Загрузка файла'
-    )
 
     def __str__(self):
         return f'{self.title}: {self.category}, {self.text}'

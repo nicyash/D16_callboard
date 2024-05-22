@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Объявление:</h1>
 <h1>{{object.title}}</h1>
-<h1>{{object.ad_time}}</h1>
+<h5>{{object.ad_time}}</h5>
 <hr>
 {% if request.user.id == object.author.id %}
 <form action="" method="post">

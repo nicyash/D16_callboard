@@ -25,7 +25,7 @@ Ad
            <tr>
                <td> <a href="{% url 'ad_detail' ad.pk %}"> {{ad.title}} </a></td>
                <td>{{ ad.ad_time|date:'d.m.Y' }}</td>
-               <td>{{ ad.text|truncatewords:20 }}</td>
+               <td>{{ ad.text|safe }}</td>
                <td>{{ ad.get_category_display  }}</td>
                <td>
                     {# А здесь доступ для каждой ссылки теперь будем проверять отдельно #}

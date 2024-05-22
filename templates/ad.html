@@ -18,7 +18,7 @@ Ad
                <td>{{ ad.get_category_display }}</td>
            </tr>
            <tr>
-               <td>{{ ad.text}}</td>
+               <td>{{ ad.text|safe}}</td>
            </tr>
            <tr>
                <td>Опубликовоно {{ ad.ad_time|date:'d.m.Y' }}. Автор :{{ ad.author }}</td>
