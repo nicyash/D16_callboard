@@ -1,13 +1,15 @@
 {% extends 'default.html' %}
 
+
+
 <!-- Название у нас будет Ad -->
 {% block title %}
-Ad
+Response
 {% endblock title %}
 
 <!-- В контенте на странице мы выводим все объявления -->
 {% block content %}
-   <h1>Все объявления</h1>
+   <h1>Отклики</h1>
    {# Добавляем форму, которая объединяет набор полей, которые будут отправляться в запросе #}
    <form action="" method="get">
        {# Переменная, которую мы передали через контекст, может сгенерировать нам форму с полями #}
@@ -16,37 +18,36 @@ Ad
        <input type="submit" value="Найти" />
    </form>
    <hr>
-   {% if ads %}
+   {% if responses %}
        <table>
            <tr>
-               <td width="400">Название</td>
-               <td width="150">Дата публикации объявления</td>
-               <td width="700">Описание</td>
-               <td width="200">Категории</td>
-               {# Условие получается составным. #}
-               {% if perms.BoardApp.change_ad or perms.BoardApp.delete_ad %}
+               <td width="150">Объявление</td>
+               <td width="700">Отклик</td>
+               <td width="150">Дата создания отклика</td>
+               <td width="100">Автор</td>
                <td width="250">Действия</td>
-               {% endif %}
            </tr>
-           {% for ad in ads %}
+           {% for response in responses %}
            <tr>
-               <td> <a href="{% url 'ad_detail' ad.pk %}"> {{ad.title}} </a></td>
-               <td>{{ ad.ad_time|date:'d.m.Y' }}</td>
-               <td>{{ ad.text|safe }}</td>
-               <td>{{ ad.get_category_display  }}</td>
+               <td>{{ response.ad.title|safe }}</td>
+               <td>{{ response.text|safe }}</td>
+               <td>{{ response.response_time|date:'d.m.Y' }}</td>
+               <td>{{ response.author  }}</td>
                <td>
                     {# А здесь доступ для каждой ссылки теперь будем проверять отдельно #}
-                    {% if ad.author == request.user %}
-                        <a href="{% url 'ad_update' ad.pk %}">Изменить</a>
-                        <a href="{% url 'ad_delete' ad.pk %}">  Удалить</a>
+                    {% if response.status == False %}
+                        <a href="{% url 'response_accept' response.pk %}">Принять</a>
+                    {% else %}
+                        <q>Принято</q>
                     {% endif %}
+                    <a href="{% url 'response_delete' response.pk %}">Удалить</a>
                 </td>
            </tr>
            {% endfor %}
 
        </table>
    {% else %}
-       <h2>Объявлений нет!</h2>
+       <h2>Откликов нет!</h2>
    {% endif %}
 
    {# Информация о предыдущих страницах #}

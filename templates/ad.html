@@ -27,4 +27,8 @@ Ad
    {% else %}
        <h2>Такого поста не существует!</h2>
    {% endif %}
+<hr>
+   {% if ad.author != request.user and request.user.is_authenticated %}
+      <a href="{% url 'response_create' ad.pk %}"><h5>Добавить отклик</h5></a>
+   {% endif %}
 {% endblock content %}
